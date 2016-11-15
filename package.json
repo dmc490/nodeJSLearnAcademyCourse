@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "node app",
-    "dev": "nodemon app",
+    "dev": "nodemon server",
     "pretest":"echo Starting test!!",
     "test": "node test",
     "posttest":"echo Finished Testing!!",
