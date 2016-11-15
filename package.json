@@ -5,6 +5,8 @@
   "main": "app.js",
   "dependencies": {
     "axios": "^0.15.2",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-register": "^6.18.0",
     "lodash": "^4.16.6"
   },
   "devDependencies": {
@@ -14,9 +16,9 @@
   "scripts": {
     "start": "node app",
     "dev": "nodemon server",
-    "pretest":"echo Starting test!!",
+    "pretest": "echo Starting test!!",
     "test": "node test",
-    "posttest":"echo Finished Testing!!",
+    "posttest": "echo Finished Testing!!",
     "test-watch": "nodemon test"
   },
   "author": "",
