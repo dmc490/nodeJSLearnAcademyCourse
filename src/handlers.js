@@ -2,10 +2,13 @@
  * Created by userr on 15/11/2016.
  */
 export function homepage (req,res) {
-    res.setHeader("Content-Type", "text/html")
-    res.end("<h1>Hello</h1>")
+    res.send("<h1>TO</h1>")
 }
 
+export function profile (req,res) {
+    let profile = {name:"Will", age:22}
+    res.send(profile)
+}
 /*exports.profile = function (req,res) {
     var profile = {
         name: "Will",
@@ -14,9 +17,3 @@ export function homepage (req,res) {
     res.setHeader("Content-Type", "application/json")
     res.end(JSON.stringify(profile))
 }*/
-
-export function notFound (req,res) {
-    res.statusCode = 404
-    res.setHeader("Content-Type", "text/html")
-    res.end("<h1>404 Not Found!</h1>")
-}
