@@ -5,6 +5,7 @@ const express  = require("express")
 
 const app = express()
 const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
 const passport = require("passport")
 const db = require('./db')
 require("./passport")
@@ -21,7 +22,10 @@ var faviconPath = __dirname + "/public/favicon.ico"
 
 app
     //.set("views",__dirname + "/views")
-    .use(session({secret:"i love cats",resave:false,saveUninitialized:false}))
+    .use(session({secret:"i love cats",
+        store:new RedisStore(),
+        resave:false,
+        saveUninitialized:false}))
     .use(passport.initialize())
     .use(passport.session())
     .set("view engine","hjs")
@@ -37,11 +41,14 @@ app
         }).catch((err)=>{
             res.send(err)
         })*/
-        res.send({
-            session: req.session,
-            user:req.user,
-            authenticated:req.isAuthenticated(),
-        })
+        setTimeout(()=>{
+            res.send({
+                session: req.session,
+                user:req.user,
+                authenticated:req.isAuthenticated(),
+            })
+        },2000)
+
         /*
         let title = "some other title"
         let tweets = ["a", "b", "c"]
