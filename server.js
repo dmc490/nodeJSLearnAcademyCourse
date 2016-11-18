@@ -8,6 +8,8 @@ const session = require('express-session')
 const passport = require("passport")
 const db = require('./db')
 require("./passport")
+const authRoutes = require("./routes/auth")
+const tweetsRoutes = require("./routes/tweets")
 const bodyParser = require("body-parser")
 /*import bodyParser from "body-parser"
 import { homepage, profile } from './handlers'
@@ -15,7 +17,6 @@ import users from "./routes/users"*/
 const favicon = require('serve-favicon')
 var staticAssets = __dirname + "/public"
 var faviconPath = __dirname + "/public/favicon.ico"
-
 
 
 app
@@ -28,6 +29,8 @@ app
     .use(bodyParser.urlencoded({extended:false}))
     .use(express.static(staticAssets))
     .use(favicon(faviconPath))
+    .use(authRoutes)
+    .use(tweetsRoutes)
     .get("/",(req,res)=>{
         /*db("users").then(users=>{
             res.send(users)
@@ -60,18 +63,7 @@ app
         req.session.name = "Will"
         res.send(req.session)
     })
-    .get('/login',(req,res,next)=>{
-        res.render("login")
-    })
-    .post('/login',passport.authenticate("local",{
-        successRedirect:"/",
-        failureRedirect:"/login",
-    }))
-    .get('/logout',(req,res,next)=>{
-        req.session.destroy((err) => {
-            res.redirect("login")
-        })
-    })
+
     /*.use(bodyParser.json())
     .use(bodyParser.urlencoded({extended:false}))
     .use("/users",users)*/
