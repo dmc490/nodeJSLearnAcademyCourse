@@ -6,6 +6,7 @@ const express  = require("express")
 const app = express()
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
+const cache = require('./cache')
 const passport = require("passport")
 const db = require('./db')
 require("./passport")
@@ -35,7 +36,7 @@ app
     .use(favicon(faviconPath))
     .use(authRoutes)
     .use(tweetsRoutes)
-    .get("/",(req,res)=>{
+    .get("/",cache.route({expire:5,prefix:"home"}),(req,res,next)=>{
         /*db("users").then(users=>{
             res.send(users)
         }).catch((err)=>{
