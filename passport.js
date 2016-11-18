@@ -5,9 +5,12 @@ const db = require('./db')
 const passport = require('passport')
 const bcrypt = require("bcrypt-nodejs")
 const LocalStrategy = require('passport-local').Strategy
+//const GitHubStrategy = require('passport-github').Strategy
+const GitHubStrategy = require('./oauth/github')
 
 passport.use(new LocalStrategy(authenticate))
 passport.use("local-register",new LocalStrategy({passReqToCallback:true},register))
+passport.use(GitHubStrategy)
 
 function authenticate(email, password, done){
     db("users")
